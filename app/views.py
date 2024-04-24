@@ -59,7 +59,7 @@ def pets_form(request, id=None):
 
         pet_id = request.POST.get("id") if "id" in request.POST else None
 
-        if pet_id == "":
+        if pet_id is None:
             saved, errors = Pet.save_pet(request.POST)
         else:
             pet = get_object_or_404(Pet, pk=pet_id)
@@ -76,13 +76,6 @@ def pets_form(request, id=None):
     return render(
         request, "pets/form.html", {"errors": errors, "form": form, "form_title": "Agregar Mascota", "form_action": "pets_form"}
     )
-
-
-    pet = None
-    if id is not None:
-        pet = get_object_or_404(Pet, pk=id)
-
-    return render(request, "pets/form.html", {"pet": pet})
 
 def pets_delete(request):
     pet_id = request.POST.get("pet_id")
