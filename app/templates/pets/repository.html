@@ -29,10 +29,10 @@
                 <td>{{ pet.birthday }}</td>
                 <td>
                     <a class="btn btn-outline-primary"
-                        href="{% url 'pet_edit' id=pet.id %}"
+                        href="{% url 'pets_edit' id=pet.id %}"
                     >Editar</a>
                     <form method="POST"
-                        action="{% url 'pet_delete' %}"
+                        action="{% url 'pets_delete' %}"
                         aria-label="Formulario de eliminación de mascota">
                         {% csrf_token %}
 
