@@ -74,7 +74,7 @@ def pets_form(request, id=None):
     form = PetForm(request.POST or None, instance=pet)
 
     return render(
-        request, "pets/form.html", {"errors": errors, "form": form, "form_title": "Agregar Mascota", "form_action": "add_pet"}
+        request, "pets/form.html", {"errors": errors, "form": form, "form_title": "Agregar Mascota", "form_action": "pets_form"}
     )
 
 
