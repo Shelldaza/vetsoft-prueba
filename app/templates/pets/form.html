@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-lg-6 offset-lg-3">
             <form class="vstack gap-3 {% if errors %}was-validated{% endif %}"
-                aria-label="Formulario de {{ form_title.lower() }}"
+            aria-label="Formulario de  {{ form_title|lower }} "
                 method="POST"
                 action="{% url form_action %}"
                 novalidate>
