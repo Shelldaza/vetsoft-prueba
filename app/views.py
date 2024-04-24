@@ -51,9 +51,11 @@ def pets_repository(request):
     return render(request, "pets/repository.html", {"pets": pets})
 
 def pets_form(request, id=None):
+    errors = {}
+    pet = None
+
     if request.method == "POST":
         pet_id = request.POST.get("id", "")
-        errors = {}
         saved = True
 
         if pet_id == "":
@@ -64,10 +66,16 @@ def pets_form(request, id=None):
 
         if saved:
             return redirect(reverse("pets_repo"))
+    else:
+        if id is not None:
+            pet = get_object_or_404(Pet, pk=id)
+
+    form = PetForm(request.POST or None, instance=pet)
 
     return render(
-            request, "pets/form.html", {"errors": errors, "pet": PetForm(request.POST)}
-        )
+        request, "pets/form.html", {"errors": errors, "form": form}
+    )
+
 
     pet = None
     if id is not None:
