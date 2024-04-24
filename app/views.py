@@ -64,8 +64,8 @@ def pets_form(request, id=None):
         if saved:
             return redirect(reverse("pets_repo"))
 
-        return render(
-            request, "pets/form.html", {"errors": errors, "pet": request.POST}
+    return render(
+            request, "pets/form.html", {"errors": errors, "pet": PetForm(request.POST)}
         )
 
     pet = None
