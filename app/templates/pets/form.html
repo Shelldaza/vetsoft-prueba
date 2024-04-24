@@ -18,7 +18,9 @@
 
                 {% csrf_token %}
 
-                <input type="hidden" value="{{ form.instance.id }}" name="id" />
+                {% if form.instance.id %}
+                    <input type="hidden" value="{{ form.instance.id }}" name="id" />
+                {% endif %}
 
                 <div>
                     <label for="name" class="form-label">Nombre</label>
