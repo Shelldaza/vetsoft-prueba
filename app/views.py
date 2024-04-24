@@ -55,8 +55,9 @@ def pets_form(request, id=None):
     pet = None
 
     if request.method == "POST":
-        pet_id = request.POST.get("id", "")
         saved = True
+
+        pet_id = request.POST.get("id") if "id" in request.POST else None
 
         if pet_id == "":
             saved, errors = Pet.save_pet(request.POST)
@@ -73,7 +74,7 @@ def pets_form(request, id=None):
     form = PetForm(request.POST or None, instance=pet)
 
     return render(
-        request, "pets/form.html", {"errors": errors, "form": form}
+        request, "pets/form.html", {"errors": errors, "form": form, "form_title": "Agregar Mascota", "form_action": "add_pet"}
     )
 
 
