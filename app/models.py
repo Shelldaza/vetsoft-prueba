@@ -21,6 +21,21 @@ def validate_client(data):
 
     return errors
 
+def validate_pet(data):
+    errors = {}
+
+    name = data.get("name", "")
+    breed = data.get("breed", "")
+    birthday = data.get("birthday", "")
+
+    if name == "":
+        errors["name"] = "Por favor ingrese un nombre para la mascota"
+
+    if birthday == "":
+        errors["birthday"] = "Por favor ingrese la fecha de nacimiento de la mascota"
+
+    return errors
+
 
 class Client(models.Model):
     name = models.CharField(max_length=100)
@@ -57,7 +72,7 @@ class Client(models.Model):
 
 class Pet(models.Model):
     name = models.CharField(max_length=100)
-    breed = models.CharField(max_length=100)
+    breed = models.CharField(max_length=100, blank=True)
     birthday = models.DateField()
 
     def __str__(self):
