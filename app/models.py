@@ -143,7 +143,7 @@ class Medicine(models.Model):
 
     def update_medicine(self, medicine_data):
         self.name = medicine_data.get("name", "") or self.name
-        self.breed = medicine_data.get("descripcion", "") or self.descripcion
-        self.birthday = medicine_data.get("dosis", "") or self.dosis
+        self.descripcion = medicine_data.get("descripcion", "") or self.descripcion
+        self.dosis = medicine_data.get("dosis", "") or self.dosis
 
         self.save()
