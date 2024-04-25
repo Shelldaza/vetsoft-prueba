@@ -36,6 +36,24 @@ def validate_pet(data):
 
     return errors
 
+def validate_medicine(data):
+    errors = {}
+
+    name = data.get("name", "")
+    descripcion = data.get("descripcion", "")
+    dosis = data.get("dosis", "")
+
+    if name == "":
+        errors["name"] = "Por favor ingrese un nombre para el medicamento"
+
+    if descripcion == "":
+        errors["descripcion"] = "Por favor ingrese una descripcion"
+    
+    if dosis == "":
+        errors["dosis"] = "Por favor ingrese una dosis"
+
+    return errors
+
 
 class Client(models.Model):
     name = models.CharField(max_length=100)
@@ -97,5 +115,35 @@ class Pet(models.Model):
         self.name = pet_data.get("name", "") or self.name
         self.breed = pet_data.get("breed", "") or self.breed
         self.birthday = pet_data.get("birthday", "") or self.birthday
+
+        self.save()
+
+class Medicine(models.Model):
+    name = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=100, blank=True)
+    dosis = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+    
+    @classmethod
+    def save_medicine(cls, medicine_data):
+        errors = validate_pet(medicine_data)
+
+        if len(errors.keys()) > 0:
+            return False, errors
+
+        Medicine.objects.create(
+            name=medicine_data.get("name"),
+            descripcion=medicine_data.get("descripcion"),
+            dosis=medicine_data.get("dosis"),
+        )
+
+        return True, None
+
+    def update_medicine(self, medicine_data):
+        self.name = medicine_data.get("name", "") or self.name
+        self.breed = medicine_data.get("descripcion", "") or self.descripcion
+        self.birthday = medicine_data.get("dosis", "") or self.dosis
 
         self.save()
