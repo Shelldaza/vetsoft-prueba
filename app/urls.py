@@ -11,4 +11,8 @@ urlpatterns = [
     path("pets/nuevo/", view=views.pets_form, name="pets_form"),
     path("pets/editar/<int:id>/", view=views.pets_form, name="pets_edit"),
     path("pets/eliminar/", view=views.pets_delete, name="pets_delete"),
+    path("medicines/", view=views.medicines_repository, name="medicines_repo"),
+    path("medicines/nuevo/", view=views.medicines_form, name="medicines_form"),
+    path("medicines/editar/<int:id>/", view=views.medicines_form, name="medicines_edit"),
+    path("medicines/eliminar/", view=views.medicines_delete, name="medicines_delete"),
 ]
