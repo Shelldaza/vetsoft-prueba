@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .models import Client
 from .models import Pet
 from .forms import PetForm
+from .models import Medicine
+from .forms import MedicineForm
+
 
 
 def home(request):
@@ -82,3 +85,41 @@ def pets_delete(request):
     pet = get_object_or_404(Pet, pk=int(pet_id))
     pet.delete()
     return redirect(reverse("pets_repo"))
+
+
+def medicines_repository(request):
+    medicines = Medicine.objects.all()
+    return render(request, "medicines/repository.html", {"medicines": medicines})
+
+def medicines_form(request, id=None):
+    errors = {}
+    medicine = None
+
+    if request.method == "POST":
+        saved = True
+
+        medicine_id = request.POST.get("id") if "id" in request.POST else None
+
+        if medicine_id is None:
+            saved, errors = Medicine.save_medicine(request.POST)
+        else:
+            medicine = get_object_or_404(Medicine, pk=medicine_id)
+            medicine.update_medicine(request.POST)
+
+        if saved:
+            return redirect(reverse("medicines_repo"))
+    else:
+        if id is not None:
+            medicine = get_object_or_404(Medicine, pk=id)
+
+    form = MedicineForm(request.POST or None, instance=medicine)
+
+    return render(
+        request, "medicines/form.html", {"errors": errors, "form": form, "form_title": "Agregar Medicamento", "form_action": "pets_form"}
+    )
+
+def medicines_delete(request):
+    medicine_id = request.POST.get("medicine_id")
+    medicine = get_object_or_404(Medicine, pk=int(medicine_id))
+    medicine.delete()
+    return redirect(reverse("medicines_repo"))
