@@ -147,3 +147,10 @@ class Medicine(models.Model):
         self.birthday = medicine_data.get("dosis", "") or self.dosis
 
         self.save()
+
+class Provider(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.name
