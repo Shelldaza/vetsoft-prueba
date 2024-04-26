@@ -12,3 +12,8 @@ class MedicineForm(forms.ModelForm):
     class Meta:
         model = Medicine
         fields = ['name', 'descripcion', 'dosis']
+
+class ProviderForm(forms.ModelForm):
+    class Meta:
+        model = Provider
+        fields = ['name', 'email']

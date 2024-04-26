@@ -4,7 +4,8 @@ from .models import Pet
 from .forms import PetForm
 from .models import Medicine
 from .forms import MedicineForm
-
+from .models import Provider
+from .forms import ProviderForm
 
 
 def home(request):
@@ -123,3 +124,40 @@ def medicines_delete(request):
     medicine = get_object_or_404(Medicine, pk=int(medicine_id))
     medicine.delete()
     return redirect(reverse("medicines_repo"))
+
+def provider_repository(request):
+    providers = Provider.objects.all()
+    return render(request, "providers/repository.html", {"providers": providers})
+
+def provider_form(request, id=None):
+    errors = {}
+    provider = None
+
+    if request.method == "POST":
+        saved = True
+
+        provider_id = request.POST.get("id") if "id" in request.POST else None
+
+        if provider_id is None:
+            saved, errors = Provider.save_provider(request.POST)
+        else:
+            provider = get_object_or_404(Provider, pk=provider_id)
+            provider.update_provider(request.POST)
+
+        if saved:
+            return redirect(reverse("provider_repo"))
+    else:
+        if id is not None:
+            provider = get_object_or_404(Provider, pk=id)
+
+    form = ProviderForm(request.POST or None, instance=provider)
+
+    return render(
+        request, "providers/form.html", {"errors": errors, "form": form, "form_title": "Agregar Proveedor", "form_action": "provider_form"}
+    )
+
+def provider_delete(request):
+    provider_id = request.POST.get("provider_id")
+    provider = get_object_or_404(Provider, pk=int(provider_id))
+    provider.delete()
+    return redirect(reverse("provider_repo"))
