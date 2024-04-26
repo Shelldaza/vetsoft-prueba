@@ -138,8 +138,8 @@ def provider_form(request, id=None):
         if provider_id == "":
             saved, errors = Provider.save_provider(request.POST)
         else:
-            provider = get_object_or_404(Client, pk=client_id)
-            provider.update_client(request.POST)
+            provider = get_object_or_404(Provider, pk=provider_id)
+            provider.update_provider(request.POST)
 
         if saved:
             return redirect(reverse("provider_repo"))

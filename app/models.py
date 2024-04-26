@@ -188,5 +188,5 @@ class Provider(models.Model):
     def update_provider(self, provider_data):
         self.name = provider_data.get("name", "") or self.name
         self.email = provider_data.get("email", "") or self.email
-
+        
         self.save()
