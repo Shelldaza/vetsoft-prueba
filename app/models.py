@@ -144,7 +144,7 @@ class Medicine(models.Model):
     
     @classmethod
     def save_medicine(cls, medicine_data):
-        errors = validate_pet(medicine_data)
+        errors = validate_medicine(medicine_data)
 
         if len(errors.keys()) > 0:
             return False, errors
@@ -159,8 +159,8 @@ class Medicine(models.Model):
 
     def update_medicine(self, medicine_data):
         self.name = medicine_data.get("name", "") or self.name
-        self.breed = medicine_data.get("descripcion", "") or self.descripcion
-        self.birthday = medicine_data.get("dosis", "") or self.dosis
+        self.descripcion = medicine_data.get("descripcion", "") or self.descripcion
+        self.dosis = medicine_data.get("dosis", "") or self.dosis
 
         self.save()
 

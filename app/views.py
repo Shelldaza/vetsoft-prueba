@@ -89,8 +89,8 @@ def pets_delete(request):
 
 
 def medicines_repository(request):
-    medicines = Medicine.objects.all()
-    return render(request, "medicines/repository.html", {"medicines": medicines})
+    medicine = Medicine.objects.all()
+    return render(request, "medicines/repository.html", {"medicines": medicine})
 
 def medicines_form(request, id=None):
     errors = {}
@@ -118,6 +118,7 @@ def medicines_form(request, id=None):
     return render(
         request, "medicines/form.html", {"errors": errors, "form": form, "form_title": "Agregar Medicamento", "form_action": "pets_form"}
     )
+
 
 def medicines_delete(request):
     medicine_id = request.POST.get("medicine_id")
