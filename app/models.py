@@ -128,7 +128,7 @@ class Medicine(models.Model):
     
     @classmethod
     def save_medicine(cls, medicine_data):
-        errors = validate_pet(medicine_data)
+        errors = validate_medicine(medicine_data)
 
         if len(errors.keys()) > 0:
             return False, errors
