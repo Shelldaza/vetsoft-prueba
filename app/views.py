@@ -127,7 +127,7 @@ def medicines_delete(request):
 
 def provider_repository(request):
     providers = Provider.objects.all()
-    return render(request, "providers/repository.html", {"providers": providers})
+    return render(request, "provider/repository.html", {"providers": providers})
 
 def provider_form(request, id=None):
     errors = {}
@@ -153,7 +153,7 @@ def provider_form(request, id=None):
     form = ProviderForm(request.POST or None, instance=provider)
 
     return render(
-        request, "providers/form.html", {"errors": errors, "form": form, "form_title": "Agregar Proveedor", "form_action": "provider_form"}
+        request, "provider/form.html", {"errors": errors, "form": form, "form_title": "Agregar Proveedor", "form_action": "provider_form"}
     )
 
 def provider_delete(request):

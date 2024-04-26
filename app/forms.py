@@ -1,6 +1,7 @@
 from django import forms
 from .models import Pet
 from .models import Medicine
+from .models import Provider
 
 
 class PetForm(forms.ModelForm):
