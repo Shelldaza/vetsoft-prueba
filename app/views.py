@@ -130,31 +130,32 @@ def provider_repository(request):
     return render(request, "provider/repository.html", {"providers": providers})
 
 def provider_form(request, id=None):
-    errors = {}
-    provider = None
-
     if request.method == "POST":
+        provider_id = request.POST.get("id", "")
+        errors = {}
         saved = True
 
-        provider_id = request.POST.get("id") if "id" in request.POST else None
-
-        if provider_id is None:
+        if provider_id == "":
             saved, errors = Provider.save_provider(request.POST)
         else:
-            provider = get_object_or_404(Provider, pk=provider_id)
-            provider.update_provider(request.POST)
+            provider = get_object_or_404(Client, pk=client_id)
+            provider.update_client(request.POST)
 
         if saved:
             return redirect(reverse("provider_repo"))
-    else:
-        if id is not None:
-            provider = get_object_or_404(Provider, pk=id)
 
-    form = ProviderForm(request.POST or None, instance=provider)
+        return render(
+            request, "provider/form.html", {"errors": errors, "provider": request.POST}
+        )
 
-    return render(
-        request, "provider/form.html", {"errors": errors, "form": form, "form_title": "Agregar Proveedor", "form_action": "provider_form"}
-    )
+    provider = None
+    if id is not None:
+        provider = get_object_or_404(Provider, pk=id)
+
+    return render(request, "provider/form.html", {"provider": provider})
+    errors = {}
+    provider = None
+
 
 def provider_delete(request):
     provider_id = request.POST.get("provider_id")
