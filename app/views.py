@@ -115,7 +115,7 @@ def medicines_form(request, id=None):
     form = MedicineForm(request.POST or None, instance=medicine)
 
     return render(
-        request, "medicines/form.html", {"errors": errors, "form": form, "form_title": "Agregar Medicamento", "form_action": "pets_form"}
+        request, "medicines/form.html", {"errors": errors, "form": form, "form_title": "Agregar Medicamento", "form_action": "medicines_form"}
     )
 
 
