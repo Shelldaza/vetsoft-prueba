@@ -8,6 +8,7 @@ Russo, Matias Ruben.
 Ruival,Pablo Daniel.
 Daza,Facundo.
 Baroni Rodrigo,Mauro
+Sivori, Diego
 
 ## Dependencias
 
