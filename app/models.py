@@ -76,13 +76,13 @@ def validate_product(data):
     type = data.get("type","")
     price = data.get("price","")
 
-    if not name:
+    if name == "":
         errors['name'] = 'Por favor ingrese un nombre para el producto'
-    if not type:
+    if type == "":
         errors['type'] = 'Por favor ingrese el tipo del producto'
-    if not price:
+    if price == "":
         errors['price'] = 'Por favor ingrese el precio del producto'
-    elif price <= 0:
+    elif float(price) <= 0:
         errors['price'] = 'Por favor ingrese el precio del producto debe ser mayor que cero'
 
     return errors
@@ -233,7 +233,7 @@ class Product(models.Model):
 
     def update_product(self, product_data):
         self.name = product_data.get("name", "") or self.name
-        self.descripcion = product_data.get("descripcion", "") or self.descripcion
+        self.type = product_data.get("type", "") or self.descripcion
         self.price = product_data.get("price", "") or self.price
 
         self.save()
