@@ -70,6 +70,27 @@ def validate_provider(data):
 
     return errors
 
+def validate_Vet(data):
+    errors = {}
+
+    name = data.get("name", "")
+    email = data.get("email", "")
+    phone = data.get("phone", "")
+    
+
+    if name == "":
+        errors["name"] = "Por favor ingrese un nombre"
+
+    if email == "":
+        errors["email"] = "Por favor ingrese un email"
+    elif email.count("@") == 0:
+        errors["email"] = "Por favor ingrese un email valido"
+
+    if phone == "":
+        errors["phone"] = "Por favor ingrese un teléfono"
+
+    
+    return errors
 
 class Client(models.Model):
     name = models.CharField(max_length=100)
