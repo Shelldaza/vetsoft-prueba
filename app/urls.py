@@ -19,8 +19,8 @@ urlpatterns = [
     path("proveedores/nuevo/", view=views.provider_form, name="provider_form"), 
     path("proveedores/editar/<int:id>/", view=views.provider_form, name="provider_edit"),
     path("proveedores/eliminar/", view=views.provider_delete, name="provider_delete"), 
-    path("products/", view=views.provider_repository, name="product_repo"), 
-    path("products/nuevo/", view=views.provider_form, name="product_form"), 
-    path("products/editar/<int:id>/", view=views.provider_form, name="product_edit"),
-    path("products/eliminar/", view=views.provider_delete, name="product_delete"), 
+    path("products/", view=views.products_repository, name="products_repo"), 
+    path("products/nuevo/", view=views.products_form, name="products_form"), 
+    path("products/editar/<int:id>/", view=views.products_form, name="products_edit"),
+    path("products/eliminar/", view=views.products_delete, name="products_delete"), 
 ]
