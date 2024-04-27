@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from .models import Client, Product
+from .models import Client 
 from .models import Pet
 from .forms import PetForm
 from .models import Medicine
 from .forms import MedicineForm
 from .models import Provider
 from .forms import ProviderForm
+from .models import Product
+from .forms import ProductForm
 
 
 def home(request):
@@ -178,14 +180,16 @@ def products_form(request, id=None):
         if product_id == "":
             saved, errors = Product.save_product(request.POST)
         else:
-            client = get_object_or_404(Product, pk=product_id)
-            client.update_product(request.POST)
+            product = get_object_or_404(Product, pk=product_id)
+            product.update_product(request.POST)
 
         if saved:
             return redirect(reverse("products_repo"))
 
+        form = ProductForm(request.POST or None, instance=product)
+
         return render(
-            request, "products/form.html", {"errors": errors, "product": request.POST}
+        request, "products/form.html", {"errors": errors, "form": form, "form_title": "Agregar Producto", "form_action": "products_form"}
         )
 
     product = None
