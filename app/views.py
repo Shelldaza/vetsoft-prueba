@@ -163,3 +163,41 @@ def provider_delete(request):
     provider = get_object_or_404(Provider, pk=int(provider_id))
     provider.delete()
     return redirect(reverse("provider_repo"))
+
+def clients_repository(request):
+    clients = Client.objects.all()
+    return render(request, "clients/repository.html", {"clients": clients})
+
+
+def vet_form(request, id=None):
+    if request.method == "POST":
+        vet_id = request.POST.get("id", "")
+        errors = {}
+        saved = True
+
+        if client_id == "":
+            saved, errors = vet.save_vet(request.POST)
+        else:
+            vet = get_object_or_404(vet, pk=vet_id)
+            vet.update_vet(request.POST)
+
+        if saved:
+            return redirect(reverse("vet_repo"))
+
+        return render(
+            request, "vet/form.html", {"errors": errors, "vet": request.POST}
+        )
+
+    vet = None
+    if id is not None:
+        vet = get_object_or_404(vet, pk=id)
+
+    return render(request, "vet/form.html", {"vet": vet})
+
+
+def vet_delete(request):
+    vet_id = request.POST.get("vet_id")
+    vet = get_object_or_404(vet, pk=int(vet_id))
+    vet.delete()
+
+    return redirect(reverse("vet_repo"))
