@@ -7,6 +7,7 @@ Aplicación web para veterinarias utilizada en la cursada 2024 de Ingeniería y 
 Russo, Matias Ruben.
 Ruival,Pablo Daniel.
 Daza,Facundo.
+Baroni Rodrigo,Mauro
 
 ## Dependencias
 
