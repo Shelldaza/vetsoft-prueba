@@ -6,8 +6,13 @@ from .models import Medicine
 from .forms import MedicineForm
 from .models import Provider
 from .forms import ProviderForm
+<<<<<<< HEAD
 from .models import Product
 from .forms import ProductForm
+=======
+from .models import Vet
+from .forms import VetForm
+>>>>>>> main
 
 
 def home(request):
@@ -166,6 +171,7 @@ def provider_delete(request):
     provider.delete()
     return redirect(reverse("provider_repo"))
 
+<<<<<<< HEAD
 def products_repository(request):
     products = Product.objects.all()
     return render(request, "products/repository.html", {"products": products})
@@ -205,3 +211,44 @@ def products_delete(request):
     product.delete()
 
     return redirect(reverse("products_repo"))
+=======
+def vet_repository(request):
+    vet = Vet.objects.all()
+    return render(request, "vet/repository.html", {"vet": vet})
+
+
+def vet_form(request, id=None):
+    if request.method == "POST":
+        vet_id = request.POST.get("id", "")
+        errors = {}
+        saved = True
+
+        if vet_id == "":
+            saved, errors = Vet.save_vet(request.POST)
+        else:
+            vet = get_object_or_404(Vet, pk=vet_id)
+            vet.update_vet(request.POST)
+
+        if saved:
+            return redirect(reverse("vet_repo"))
+
+        return render(
+            request, "vet/form.html", {"errors": errors, "vet": request.POST}
+        )
+
+    vet = None
+    if id is not None:
+        vet = get_object_or_404(Vet, pk=id)
+
+    form = VetForm(request.POST or None, instance=vet)
+
+    return render(request, "vet/form.html", {"vet": vet})
+
+
+def vet_delete(request):
+    vet_id = request.POST.get("vet_id")
+    vet = get_object_or_404(Vet, pk=int(vet_id))
+    vet.delete()
+
+    return redirect(reverse("vet_repo"))
+>>>>>>> main

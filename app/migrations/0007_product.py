@@ -5,7 +5,7 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [   ('app', '0005_medicine_provider')
+    dependencies = [   ('app', '0006_vet')
     ]
 
     operations = [

@@ -18,9 +18,17 @@ urlpatterns = [
     path("proveedores/", view=views.provider_repository, name="provider_repo"), 
     path("proveedores/nuevo/", view=views.provider_form, name="provider_form"), 
     path("proveedores/editar/<int:id>/", view=views.provider_form, name="provider_edit"),
+<<<<<<< HEAD
     path("proveedores/eliminar/", view=views.provider_delete, name="provider_delete"), 
     path("products/", view=views.products_repository, name="products_repo"), 
     path("products/nuevo/", view=views.products_form, name="products_form"), 
     path("products/editar/<int:id>/", view=views.products_form, name="products_edit"),
     path("products/eliminar/", view=views.products_delete, name="products_delete"), 
+=======
+    path("proveedores/eliminar/", view=views.provider_delete, name="provider_delete"),
+    path("vet/", view=views.vet_repository, name="vet_repo"),
+    path("vet/nuevo/", view=views.vet_form, name="vet_form"),
+    path("vet/editar/<int:id>/", view=views.vet_form, name="vet_edit"),
+    path("vet/eliminar/", view=views.vet_delete, name="vet_delete"), 
+>>>>>>> main
 ]
