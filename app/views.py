@@ -172,12 +172,15 @@ def products_repository(request):
 
 
 def products_form(request, id=None):
+    errors = {}
+    product = None
+
     if request.method == "POST":
-        product_id = request.POST.get("id", "")
-        errors = {}
         saved = True
 
-        if product_id == "":
+        product_id = request.POST.get("id") if "id" in request.POST else None
+
+        if product_id is None:
             saved, errors = Product.save_product(request.POST)
         else:
             product = get_object_or_404(Product, pk=product_id)
@@ -185,20 +188,17 @@ def products_form(request, id=None):
 
         if saved:
             return redirect(reverse("products_repo"))
+    else:
+        if id is not None:
+            product = get_object_or_404(Product, pk=id)
 
-        form = ProductForm(request.POST or None, instance=product)
+    form = ProductForm(request.POST or None, instance=product)
 
-        return render(
+    return render(
         request, "products/form.html", {"errors": errors, "form": form, "form_title": "Agregar Producto", "form_action": "products_form"}
-        )
-
-    product = None
-    if id is not None:
-        product = get_object_or_404(Product, pk=id)
-
-    return render(request, "products/form.html", {"product": product})
-
-
+    )
+ 
+ 
 def products_delete(request):
     product_id = request.POST.get("product_id")
     product = get_object_or_404(Product, pk=int(product_id))
