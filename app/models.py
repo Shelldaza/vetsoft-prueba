@@ -219,3 +219,26 @@ class Vet(models.Model):
 
     def __str__(self):
         return self.name
+
+    @classmethod
+    def save_vet(cls, vet_data):
+        errors = validate_vet(vet_data)
+
+        if len(errors.keys()) > 0:
+            return False, errors
+
+        Vet.objects.create(
+            name=client_data.get("name"),
+            email=client_data.get("email"),
+            phone=client_data.get("phone"),
+                      
+        )
+
+        return True, None
+
+    def update_vet(self, vet_data):
+        self.name = client_data.get("name", "") or self.name
+        self.email = client_data.get("email", "") or self.email  
+        self.phone = client_data.get("phone", "") or self.phone
+          
+        self.save()
