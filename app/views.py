@@ -6,13 +6,10 @@ from .models import Medicine
 from .forms import MedicineForm
 from .models import Provider
 from .forms import ProviderForm
-<<<<<<< HEAD
 from .models import Product
 from .forms import ProductForm
-=======
 from .models import Vet
 from .forms import VetForm
->>>>>>> main
 
 
 def home(request):
@@ -171,7 +168,6 @@ def provider_delete(request):
     provider.delete()
     return redirect(reverse("provider_repo"))
 
-<<<<<<< HEAD
 def products_repository(request):
     products = Product.objects.all()
     return render(request, "products/repository.html", {"products": products})
@@ -211,7 +207,6 @@ def products_delete(request):
     product.delete()
 
     return redirect(reverse("products_repo"))
-=======
 def vet_repository(request):
     vet = Vet.objects.all()
     return render(request, "vet/repository.html", {"vet": vet})
@@ -251,4 +246,3 @@ def vet_delete(request):
     vet.delete()
 
     return redirect(reverse("vet_repo"))
->>>>>>> main

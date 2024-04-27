@@ -70,7 +70,7 @@ def validate_provider(data):
 
     return errors
 
-<<<<<<< HEAD
+
 def validate_product(data):
     errors = {}
     name = data.get("name","")
@@ -88,7 +88,7 @@ def validate_product(data):
 
     return errors
 
-=======
+
 def validate_Vet(data):
     errors = {}
 
@@ -107,10 +107,10 @@ def validate_Vet(data):
 
     if phone == "":
         errors["phone"] = "Por favor ingrese un teléfono"
+ 
 
-    
     return errors
->>>>>>> main
+
 
 class Client(models.Model):
     name = models.CharField(max_length=100)
@@ -231,9 +231,7 @@ class Provider(models.Model):
         self.email = provider_data.get("email", "") or self.email
         
         self.save()
-<<<<<<< HEAD
  
-
 class Product(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
@@ -245,25 +243,10 @@ class Product(models.Model):
     @classmethod
     def save_product(cls, product_data):
         errors = validate_product(product_data)
-=======
-
-class Vet(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=10)
-
-    def __str__(self):
-        return self.name
-
-    @classmethod
-    def save_vet(cls, vet_data):
-        errors = validate_Vet(vet_data)
->>>>>>> main
-
+        
         if len(errors.keys()) > 0:
             return False, errors
 
-<<<<<<< HEAD
         Product.objects.create(
             name=product_data.get("name"),
             type=product_data.get("type"),
@@ -277,12 +260,25 @@ class Vet(models.Model):
         self.price = product_data.get("price", "") or self.price
 
         self.save()
-=======
+
+class Vet(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.name
+
+    @classmethod
+    def save_vet(cls, vet_data):
+        errors = validate_Vet(vet_data)
+        if len(errors.keys()) > 0:
+            return False, errors
+            
         Vet.objects.create(
             name=vet_data.get("name"),
             email=vet_data.get("email"),
-            phone=vet_data.get("phone"),
-                      
+            phone=vet_data.get("phone"),           
         )
 
         return True, None
@@ -293,4 +289,6 @@ class Vet(models.Model):
         self.phone = vet_data.get("phone", "") or self.phone
           
         self.save()
->>>>>>> main
+ 
+
+       
