@@ -222,7 +222,7 @@ class Vet(models.Model):
 
     @classmethod
     def save_vet(cls, vet_data):
-        errors = validate_vet(vet_data)
+        errors = validate_Vet(vet_data)
 
         if len(errors.keys()) > 0:
             return False, errors
