@@ -228,17 +228,17 @@ class Vet(models.Model):
             return False, errors
 
         Vet.objects.create(
-            name=client_data.get("name"),
-            email=client_data.get("email"),
-            phone=client_data.get("phone"),
+            name=vet_data.get("name"),
+            email=vet_data.get("email"),
+            phone=vet_data.get("phone"),
                       
         )
 
         return True, None
 
     def update_vet(self, vet_data):
-        self.name = client_data.get("name", "") or self.name
-        self.email = client_data.get("email", "") or self.email  
-        self.phone = client_data.get("phone", "") or self.phone
+        self.name = vet_data.get("name", "") or self.name
+        self.email = vet_data.get("email", "") or self.email  
+        self.phone = vet_data.get("phone", "") or self.phone
           
         self.save()
